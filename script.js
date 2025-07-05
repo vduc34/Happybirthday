@@ -9,7 +9,7 @@ function resize() {
 resize();
 window.addEventListener("resize", resize);
 
-const characters = "HAPPYBIRTHDAYCHUCMUNGSINHNHATTUOIMOIZUIZE";
+const characters = "HAPPYBIRTHDAYCHUCMUNGSINHNHATMEIUCUACON";
 const fontSize = 20;
 const columns = Math.floor(W / fontSize);
 const drops = Array(columns).fill(1);
@@ -20,8 +20,10 @@ const texts = [
   "1",
   "🎂",
   "HAPPY BIRTHDAY", 
-  "13/07/1985", //Day of birth
-  "Nghiêm Thị Hoài" //Your Name
+  "07/07/1981", //Day of birth
+  "Vũ Thị Trang", //Your Name
+  "Mẹ iu mãi đỉnh",
+  "❤️"
 ];
 
 const displayTimes = [
@@ -29,6 +31,8 @@ const displayTimes = [
   3000,               
   4000,               
   4000,               
+  4000,
+  4000,
   4000                
 ];
 
@@ -115,7 +119,14 @@ class Dot {
     }
   }
   draw(ctx) {
-    ctx.fillStyle = `hsl(${(hue + this.x / W * 100) % 360}, 100%, 65%)`;
+    const gradient = ctx.createLinearGradient(0, 0, W, 0);
+    gradient.addColorStop(0.0, "#ff69b4");  // Hồng
+    gradient.addColorStop(0.25, "#ff0000"); // Đỏ tươi
+    gradient.addColorStop(0.5, "#8a2be2");  // Tím
+    gradient.addColorStop(0.75, "#00bfff"); // Xanh dương
+    gradient.addColorStop(1.0, "#ffffff");  // Trắng
+
+    ctx.fillStyle = gradient;
     ctx.fillRect(this.x, this.y, this.size, this.size);
   }
 }
@@ -137,9 +148,8 @@ function initDots(text) {
       }
     }
     if (targetPoints.length > dots.length) {
-      const diff = targetPoints.length - dots.length;
-      for (let j = 0; j < diff; j++) {
-        const p = targetPoints[dots.length + j];
+      for (let j = dots.length; j < targetPoints.length; j++) {
+        const p = targetPoints[j];
         dots.push(new Dot(p.x, p.y));
       }
     }
@@ -210,7 +220,7 @@ function drawMatrixRain() {
   }
 }
 
-currentDisplayTime = BASE_DISPLAY_TIME + (texts[0].length > 4 ? 2000 : 0);
+currentDisplayTime = displayTimes[0] || 2000;
 initDots(texts[currentTextIndex]);
 lastChangeTime = Date.now();
 lastCharTime = Date.now();
