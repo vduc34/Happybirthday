@@ -20,14 +20,14 @@ const texts = [
   "1",
   "🎂",
   "HAPPY BIRTHDAY", 
-  "Nghiên Thị Hoài", //Your Name
-  "13/07/1985" //Day of birth
+  "13/07/1985", //Day of birth
+  "Nghiêm Thị Hoài" //Your Name
 ];
 
 const displayTimes = [
   1500, 1500, 1500,    
   3000,               
-  3000,               
+  4000,               
   4000,               
   4000                
 ];
