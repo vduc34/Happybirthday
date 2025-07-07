@@ -15,6 +15,7 @@ const columns = Math.floor(W / fontSize);
 const drops = Array(columns).fill(1);
 
 const texts = [
+  " ",
   "3",
   "2",
   "1",
@@ -27,6 +28,7 @@ const texts = [
 ];
 
 const displayTimes = [
+  1000,
   1500, 1500, 1500,    
   3000,               
   4000,               
@@ -226,3 +228,22 @@ lastChangeTime = Date.now();
 lastCharTime = Date.now();
 
 setInterval(drawMatrixRain, 50);
+
+document.getElementById("startBtn").addEventListener("click", () => {
+  // Bật nhạc
+  const music = document.getElementById("bgMusic");
+  if (music) {
+    music.play().catch(err => console.log("Không thể phát nhạc:", err));
+  }
+
+  // Ẩn màn hình bắt đầu
+  document.getElementById("startScreen").style.display = "none";
+
+  // Khởi động hiệu ứng chính
+  currentDisplayTime = displayTimes[0] || 2000;
+  initDots(texts[currentTextIndex]);
+  lastChangeTime = Date.now();
+  lastCharTime = Date.now();
+
+  setInterval(drawMatrixRain, 50);
+});
